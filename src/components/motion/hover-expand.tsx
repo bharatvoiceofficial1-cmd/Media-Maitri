@@ -65,6 +65,9 @@ export function HoverExpand({
               }}
               onHoverStart={() => setHoveredIndex(i)}
               onHoverEnd={() => setHoveredIndex(null)}
+              onClick={() => setHoveredIndex(hoveredIndex === i ? null : i)}
+              role="button"
+              tabIndex={0}
             >
               <motion.div
                 className="absolute inset-0 w-full h-full"
