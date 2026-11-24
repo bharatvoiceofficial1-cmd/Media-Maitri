@@ -79,7 +79,7 @@ export default function HomeEnquiryForm() {
               setFormData({ ...formData, name: e.target.value })
             }
             placeholder="e.g. Ramesh Sharma"
-            className="w-full bg-slate-950/80 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] transition-colors"
+            className="w-full bg-slate-950/80 border border-white/15 rounded-xl px-4 py-3 text-base sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] transition-colors"
           />
         </div>
 
@@ -95,7 +95,7 @@ export default function HomeEnquiryForm() {
               setFormData({ ...formData, phone: e.target.value })
             }
             placeholder="+91 98765 43210"
-            className="w-full bg-slate-950/80 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] transition-colors"
+            className="w-full bg-slate-950/80 border border-white/15 rounded-xl px-4 py-3 text-base sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] transition-colors"
           />
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function HomeEnquiryForm() {
           onChange={(e) =>
             setFormData({ ...formData, service: e.target.value })
           }
-          className="w-full bg-slate-950/80 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
+          className="w-full bg-slate-950/80 border border-white/15 rounded-xl px-4 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
         >
           {servicesData.map((s) => (
             <option key={s.id} value={s.title}>
@@ -130,7 +130,7 @@ export default function HomeEnquiryForm() {
             setFormData({ ...formData, details: e.target.value })
           }
           placeholder="Share your campaign goals, locations, or requirements..."
-          className="w-full bg-slate-950/80 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] transition-colors"
+          className="w-full bg-slate-950/80 border border-white/15 rounded-xl px-4 py-3 text-base sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] transition-colors"
         />
       </div>
 

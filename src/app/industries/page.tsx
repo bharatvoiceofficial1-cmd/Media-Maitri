@@ -211,7 +211,7 @@ export default function IndustriesPage() {
 
                     {/* METRICS CALLOUT */}
                     {metrics && (
-                      <div className="grid grid-cols-2 gap-3 mb-6 p-4 rounded-2xl bg-amber-50/50 border border-amber-200/80">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 p-4 rounded-2xl bg-amber-50/50 border border-amber-200/80">
                         <div>
                           <div className="text-[10px] font-bold uppercase tracking-wider text-amber-900/70">
                             Recommended Media Mix

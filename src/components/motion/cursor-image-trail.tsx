@@ -48,6 +48,11 @@ export function CursorImageTrail({
   const containerElRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    // Disable on touch screens (iOS, Android, tablet) to preserve smooth native scrolling
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+
     const el = containerRef?.current ?? containerElRef.current ?? window;
 
     const onLeave = () => setTrail([]);

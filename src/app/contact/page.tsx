@@ -223,7 +223,7 @@ export default function ContactPage() {
                           setFormData({ ...formData, name: e.target.value })
                         }
                         placeholder="e.g. Ramesh Kumar"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base sm:text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                       />
                     </div>
 
@@ -239,7 +239,7 @@ export default function ContactPage() {
                           setFormData({ ...formData, phone: e.target.value })
                         }
                         placeholder="+91 98765 43210"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base sm:text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                       />
                     </div>
                   </div>
@@ -256,7 +256,7 @@ export default function ContactPage() {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         placeholder="you@company.com"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base sm:text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                       />
                     </div>
 
@@ -271,7 +271,7 @@ export default function ContactPage() {
                           setFormData({ ...formData, city: e.target.value })
                         }
                         placeholder="e.g. Varanasi, UP, Delhi-NCR"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base sm:text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                       />
                     </div>
                   </div>
@@ -285,7 +285,7 @@ export default function ContactPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, service: e.target.value })
                       }
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base sm:text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                     >
                       {servicesData.map((s) => (
                         <option key={s.id} value={s.title}>
@@ -306,7 +306,7 @@ export default function ContactPage() {
                         setFormData({ ...formData, message: e.target.value })
                       }
                       placeholder="Tell us about your brand, target audience, estimated budget, or launch dates..."
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-base sm:text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                     />
                   </div>
 

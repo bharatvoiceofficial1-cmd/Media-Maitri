@@ -49,7 +49,7 @@ export default function Footer() {
             <a
               href="/documents/Media_Maitri_Company_magazine_2027-28.pdf"
               download
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#D4AF37] to-[#F3C644] text-[#0B1930] font-bold text-xs px-4 py-2.5 rounded-xl hover:shadow-lg hover:shadow-amber-500/20 transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 bg-[#D4AF37] hover:bg-[#F3C644] text-[#0B1930] font-bold text-xs px-4 py-2.5 rounded-xl hover:shadow-lg hover:shadow-amber-500/20 transition-all hover:scale-105 active:scale-95"
             >
               <FileDown className="w-4 h-4" />
               <span>Download Official Magazine 2027–2028</span>

@@ -27,6 +27,18 @@ export default function PortfolioPage() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeModalItem, setActiveModalItem] = useState<PortfolioItem | null>(null);
 
+  // Prevent background scroll on mobile / tablet when modal is active
+  React.useEffect(() => {
+    if (activeModalItem) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeModalItem]);
+
   // Generate thumbnail nodes for the CursorImageTrail
   const trailItems = useMemo(() => {
     return portfolioData.map((item) => (
