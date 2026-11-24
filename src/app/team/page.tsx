@@ -149,7 +149,7 @@ export default function TeamPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#D4AF37] to-[#F3C644] text-[#0B1930] font-bold text-sm px-8 py-3.5 rounded-xl shadow-lg hover:scale-105 transition-all"
+            className="inline-flex items-center gap-2 bg-[#D4AF37] hover:bg-[#F3C644] text-[#0B1930] font-bold text-sm px-8 py-3.5 rounded-xl shadow-lg transition-all duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
           >
             <span>Initiate Campaign Discussion</span>
             <ArrowRight className="w-4 h-4" />

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "threeui": {
+      "disabled": false,
+      "serverUrl": "https://threeui.com/api/mcp",
+      "url": "https://threeui.com/api/mcp"
+    }
+  }
+}

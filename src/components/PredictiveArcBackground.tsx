@@ -5,7 +5,10 @@ import dynamic from "next/dynamic";
 
 // WebGL components require client-side execution (ssr: false) in Next.js
 export const PredictiveArcCanvas = dynamic(
-  () => import("@designcodeio/threeui").then((mod) => mod.PredictiveArcCanvas),
+  () =>
+    import(
+      "@designcodeio/threeui/components/PredictiveArcCanvas"
+    ).then((mod) => mod.PredictiveArcCanvas),
   { ssr: false }
 );
 

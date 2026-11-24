@@ -11,6 +11,8 @@ import {
   ArrowRight,
   MessageCircle,
   CheckCircle,
+  Building2,
+  Award,
 } from "lucide-react";
 import Card3D from "@/components/Card3D";
 import { companyData } from "@/data/companyData";
@@ -23,31 +25,31 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-16">
+    <div className="bg-[#FAF9F6] min-h-screen py-16 text-[#0B1930]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* PAGE HERO */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#B89225] bg-amber-100/70 px-4 py-1.5 rounded-full border border-amber-300 mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#B89225] bg-amber-100/70 px-4 py-1.5 rounded-full border border-amber-300 mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
             <span>Our Heritage &amp; Ethos</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1930] mb-6">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1930] mb-6 tracking-tight">
             About Media Maitri
           </h1>
-          <p className="text-slate-600 text-lg leading-relaxed">
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
             Founded on the conviction that authentic communication creates
             enduring brand value. We unite physical presence and digital reach
-            into one cohesive agency experience.
+            into one cohesive, high-impact agency experience.
           </p>
         </div>
 
         {/* SECTION: BRAND PHILOSOPHY & VALUES */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
           <div className="lg:col-span-6 space-y-6">
-            <div className="text-xs font-bold tracking-widest uppercase text-[#B89225]">
+            <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#B89225]">
               Brand Philosophy
             </div>
-            <h2 className="text-3xl font-extrabold text-[#0B1930] leading-snug">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1930] leading-snug">
               &ldquo;{companyData.tagline}&rdquo;
             </h2>
             <p className="text-slate-600 text-base leading-relaxed">
@@ -59,11 +61,13 @@ export default function AboutPage() {
             </p>
 
             <div className="space-y-4 pt-2">
-              <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white border border-slate-200">
-                <Target className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
+                  <Target className="w-5 h-5 text-[#D4AF37]" />
+                </div>
                 <div>
-                  <h4 className="font-bold text-sm text-[#0B1930]">Our Mission</h4>
-                  <p className="text-xs text-slate-600 mt-1">
+                  <h4 className="font-bold text-base text-[#0B1930]">Our Mission</h4>
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                     To empower businesses across India with end-to-end advertising
                     and communication solutions that are creative, practical, and
                     measurably effective.
@@ -71,24 +75,28 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white border border-slate-200">
-                <Compass className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
+                  <Compass className="w-5 h-5 text-[#D4AF37]" />
+                </div>
                 <div>
-                  <h4 className="font-bold text-sm text-[#0B1930]">Our Vision</h4>
-                  <p className="text-xs text-slate-600 mt-1">
+                  <h4 className="font-bold text-base text-[#0B1930]">Our Vision</h4>
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                     To be the most trusted creative communications partner for
                     enterprises seeking authentic regional and national brand growth.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white border border-slate-200">
-                <ShieldCheck className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5 text-[#D4AF37]" />
+                </div>
                 <div>
-                  <h4 className="font-bold text-sm text-[#0B1930]">
+                  <h4 className="font-bold text-base text-[#0B1930]">
                     Authentic Execution
                   </h4>
-                  <p className="text-xs text-slate-600 mt-1">
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                     From raw paper stock selection and billboard placements to
                     digital campaigns, every touchpoint is executed with precision.
                   </p>
@@ -98,9 +106,23 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-6">
-            <Card3D depth={15}>
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border border-amber-500/30">
-                <div className="relative h-96 w-full">
+            <Card3D depth={14}>
+              <div className="luxury-card rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-8 text-white relative">
+                <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                  <div>
+                    <span className="text-sm font-bold text-white block">
+                      Official Company Publication
+                    </span>
+                    <span className="text-xs text-amber-300">
+                      Magazine 2027–2028 Edition &bull; 32 Pages
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono font-bold text-[#D4AF37] bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+                    PDF Version
+                  </span>
+                </div>
+
+                <div className="relative h-80 sm:h-96 w-full rounded-2xl overflow-hidden mb-6 bg-slate-950 border border-white/10">
                   <Image
                     src="/assets/brand/cover_graphic.png"
                     alt="Media Maitri Corporate Brochure"
@@ -109,20 +131,15 @@ export default function AboutPage() {
                     className="object-cover"
                   />
                 </div>
-                <div className="p-6 bg-[#0B1930] text-white flex items-center justify-between">
-                  <div>
-                    <div className="font-bold text-sm">Official Company Magazine</div>
-                    <div className="text-xs text-amber-300">2027–2028 Edition</div>
-                  </div>
-                  <a
-                    href="/documents/Media_Maitri_Company_magazine_2027-28.pdf"
-                    download
-                    className="inline-flex items-center gap-1.5 bg-[#D4AF37] hover:bg-[#F3C644] text-[#0B1930] font-bold text-xs px-3.5 py-2 rounded-xl transition-all"
-                  >
-                    <FileDown className="w-3.5 h-3.5" />
-                    <span>Download PDF</span>
-                  </a>
-                </div>
+
+                <a
+                  href="/documents/Media_Maitri_Company_magazine_2027-28.pdf"
+                  download
+                  className="w-full flex items-center justify-center gap-2 bg-[#D4AF37] hover:bg-[#F3C644] text-[#0B1930] font-bold text-sm py-3.5 px-6 rounded-xl transition-all shadow-lg active:scale-95"
+                >
+                  <FileDown className="w-4 h-4" />
+                  <span>Download Complete 32-Page Magazine (PDF)</span>
+                </a>
               </div>
             </Card3D>
           </div>
@@ -131,12 +148,12 @@ export default function AboutPage() {
         {/* SECTION: MANAGING DIRECTOR'S MESSAGE */}
         <div className="bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-14 shadow-xl mb-24 relative overflow-hidden">
           <div className="max-w-4xl mx-auto space-y-6">
-            <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#B89225]">
+            <div className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#B89225]">
               <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
               <span>Executive Leadership Address</span>
             </div>
 
-            <h2 className="text-3xl font-extrabold text-[#0B1930]">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1930]">
               From the Desk of the Director
             </h2>
 
@@ -167,15 +184,15 @@ export default function AboutPage() {
             {/* SIGNATURES */}
             <div className="pt-8 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {companyData.directorsMessage.signatories.map((sig, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                  <div className="font-bold text-base text-[#0B1930]">
+                <div key={idx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                  <div className="font-bold text-lg text-[#0B1930]">
                     {sig.name}
                   </div>
                   <div className="text-xs font-semibold text-amber-700 mt-0.5">
                     {sig.role}
                   </div>
                   <div className="text-[11px] text-slate-500 mt-2 font-mono">
-                    Media Maitri Executive Board
+                    Media Maitri Executive Board &bull; Varanasi
                   </div>
                 </div>
               ))}
@@ -183,7 +200,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* SECTION: 4 CORE PILLARS */}
+        {/* SECTION: 4 CORE COMMITMENTS */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl font-extrabold text-[#0B1930] mb-3">
             Our Professional Approach
@@ -197,7 +214,7 @@ export default function AboutPage() {
           {companyData.values.map((val, idx) => (
             <div
               key={idx}
-              className="bg-white p-6 rounded-2xl border border-slate-200/90 hover:border-[#D4AF37] shadow-sm hover:shadow-lg transition-all"
+              className="bg-white p-7 rounded-2xl border border-slate-200/90 hover:border-[#D4AF37] shadow-sm hover:shadow-xl transition-all"
             >
               <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#D4AF37] font-bold font-mono text-sm mb-4">
                 0{idx + 1}
@@ -222,13 +239,13 @@ export default function AboutPage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/services"
-              className="bg-gradient-to-r from-[#D4AF37] to-[#F3C644] text-[#0B1930] font-bold text-sm px-6 py-3 rounded-xl shadow-lg"
+              className="bg-[#D4AF37] hover:bg-[#F3C644] text-[#0B1930] font-bold text-sm px-7 py-3.5 rounded-xl shadow-lg transition-all hover:-translate-y-0.5 active:scale-95"
             >
               Explore 12 Services
             </Link>
             <Link
               href="/contact"
-              className="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-6 py-3 rounded-xl border border-white/20"
+              className="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-7 py-3.5 rounded-xl border border-white/20 transition-all hover:-translate-y-0.5 active:scale-95"
             >
               Contact Us Directly
             </Link>

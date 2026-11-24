@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import type { Metadata } from "next";
 import {
   Phone,
   Mail,
@@ -11,7 +10,10 @@ import {
   Clock,
   ShieldCheck,
   CheckCircle,
+  Sparkles,
+  Building2,
 } from "lucide-react";
+import PredictiveArcBackground from "@/components/PredictiveArcBackground";
 import { companyData } from "@/data/companyData";
 import { servicesData } from "@/data/servicesData";
 
@@ -28,18 +30,21 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Format message for WhatsApp direct relay
+    if (!formData.name || !formData.phone) return;
+
+    // Format structured message for WhatsApp direct relay
     const waText = encodeURIComponent(
-      `*New Campaign Enquiry via Website:*\n\n` +
-        `*Name:* ${formData.name}\n` +
+      `*New Campaign Enquiry — Media Maitri Website*\n\n` +
+        `*Client Name:* ${formData.name}\n` +
         `*Phone:* ${formData.phone}\n` +
         `*Email:* ${formData.email || "N/A"}\n` +
-        `*City/State:* ${formData.city || "N/A"}\n` +
-        `*Service:* ${formData.service}\n` +
-        `*Requirements:* ${formData.message || "Please share details."}`
+        `*Target Region/City:* ${formData.city || "Varanasi / Pan-India"}\n` +
+        `*Service Requested:* ${formData.service}\n` +
+        `*Requirements:* ${formData.message || "Requesting custom rate card & timeline."}\n\n` +
+        `_Sent via mediamaitri.com_`
     );
 
-    // Open WhatsApp in new tab
+    // Open WhatsApp directly
     window.open(
       `https://wa.me/${companyData.contact.whatsapp}?text=${waText}`,
       "_blank"
@@ -48,29 +53,39 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* HEADER */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#B89225] bg-amber-100/70 px-4 py-1.5 rounded-full border border-amber-300 mb-4">
-            <MapPin className="w-3.5 h-3.5" />
+    <div className="bg-[#FAF9F6] min-h-screen text-[#0B1930]">
+      {/* =========================================================
+          SECTION 1: 3D THREEUI PREDICTIVE ARC HERO BANNER
+      ========================================================= */}
+      <section className="relative min-h-[45vh] flex items-center bg-[#060E1A] text-white overflow-hidden border-b border-amber-500/20">
+        {/* ThreeUI WebGL Predictive Arc Dynamic Shader Background */}
+        <PredictiveArcBackground variant="amber-halftone" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center w-full">
+          <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#D4AF37] bg-white/[0.04] px-4 py-1.5 rounded-full border border-amber-400/30 backdrop-blur-md mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
             <span>Connect With Media Maitri</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1930] mb-6">
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
             Contact &amp; Corporate Office
           </h1>
-          <p className="text-slate-600 text-lg leading-relaxed">
-            Have a campaign in mind or need rate cards for outdoor, transit, or
-            digital advertising? Reach out to our leadership and media managers
-            directly.
+
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Have a campaign in mind or need feasibility rate cards for outdoor hoardings,
+            moving transit fleet, or digital performance? Reach our leadership and media managers directly.
           </p>
         </div>
+      </section>
 
-        {/* MAIN CONTACT GRID */}
+      {/* =========================================================
+          SECTION 2: MAIN PROPOSAL & CONTACT GRID
+      ========================================================= */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
-          {/* LEFT COLUMN: VERIFIED CONTACT CARDS */}
+          {/* LEFT COLUMN: CORPORATE HEADQUARTERS & TELEPHONY */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-3xl bg-[#0B1930] text-white border border-amber-500/30 shadow-xl space-y-6">
+            <div className="luxury-card p-8 rounded-3xl text-white space-y-6">
               <div>
                 <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase tracking-wider block mb-1">
                   Official Headquarters
@@ -137,7 +152,7 @@ export default function ContactPage() {
                       Operating Hours:
                     </span>
                     <span className="text-slate-200">
-                      Monday &ndash; Saturday: 09:30 AM &ndash; 07:30 PM
+                      Monday &ndash; Saturday: 09:30 AM &ndash; 07:30 PM IST
                     </span>
                   </div>
                 </div>
@@ -148,7 +163,7 @@ export default function ContactPage() {
                   href={`https://wa.me/${companyData.contact.whatsapp}?text=Hello%20Media%20Maitri,%20I%20would%20like%20to%20connect%20with%20your%20team.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3.5 px-6 rounded-2xl text-sm transition-all shadow-lg hover:scale-105"
+                  className="w-full flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3.5 px-6 rounded-2xl text-sm transition-all shadow-lg active:scale-95"
                 >
                   <MessageCircle className="w-5 h-5" />
                   <span>Chat on WhatsApp Directly</span>
@@ -156,24 +171,24 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white border border-slate-200 text-xs text-slate-600 flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-emerald-500 shrink-0" />
+            <div className="p-6 rounded-3xl bg-white border border-slate-200 text-xs text-slate-600 flex items-center gap-3 shadow-sm">
+              <ShieldCheck className="w-6 h-6 text-emerald-500 shrink-0" />
               <span>
-                Your privacy is paramount. Information submitted is handled with
-                strict corporate confidentiality.
+                <strong>Confidentiality Commitment:</strong> All campaign briefs,
+                creative files, and strategic rate inquiries are protected under client NDA.
               </span>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: CONSULTATION FORM */}
+          {/* RIGHT COLUMN: INTERACTIVE PROPOSAL FORM */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-sm">
+            <div className="bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-12 shadow-xl">
               <h2 className="text-2xl font-bold text-[#0B1930] mb-2">
                 Request a Campaign Proposal
               </h2>
-              <p className="text-xs text-slate-500 mb-8">
-                Fill out the form below. When submitted, our team receives your
-                exact brief and reaches out within 2 hours.
+              <p className="text-xs text-slate-500 mb-8 leading-relaxed">
+                Fill out the brief below. When submitted, our media planning team
+                receives your exact requirements and reaches out within 2 hours.
               </p>
 
               {submitted ? (
@@ -188,9 +203,9 @@ export default function ContactPage() {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="text-xs font-bold text-emerald-700 underline"
+                    className="text-xs font-bold text-emerald-700 underline cursor-pointer"
                   >
-                    Submit another enquiry
+                    Submit another campaign brief
                   </button>
                 </div>
               ) : (
@@ -247,7 +262,7 @@ export default function ContactPage() {
 
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-2">
-                        City / Target Region
+                        Target City / Region
                       </label>
                       <input
                         type="text"
@@ -255,7 +270,7 @@ export default function ContactPage() {
                         onChange={(e) =>
                           setFormData({ ...formData, city: e.target.value })
                         }
-                        placeholder="Varanasi / Lucknow / Delhi NCR..."
+                        placeholder="e.g. Varanasi, UP, Delhi-NCR"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                       />
                     </div>
@@ -263,7 +278,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-2">
-                      Primary Service of Interest *
+                      Primary Service of Interest
                     </label>
                     <select
                       value={formData.service}
@@ -272,9 +287,9 @@ export default function ContactPage() {
                       }
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                     >
-                      {servicesData.map((svc) => (
-                        <option key={svc.id} value={svc.title}>
-                          {svc.id}. {svc.title}
+                      {servicesData.map((s) => (
+                        <option key={s.id} value={s.title}>
+                          {s.id}. {s.title}
                         </option>
                       ))}
                     </select>
@@ -282,7 +297,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-2">
-                      Project Details, Campaign Size &amp; Timelines
+                      Campaign Requirements / Brief
                     </label>
                     <textarea
                       rows={4}
@@ -290,17 +305,17 @@ export default function ContactPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
                       }
-                      placeholder="Tell us about your brand goals, target locations, or key deliverables..."
+                      placeholder="Tell us about your brand, target audience, estimated budget, or launch dates..."
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#0B1930] focus:outline-none focus:border-[#D4AF37] focus:bg-white transition-all"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F3C644] hover:from-[#F3C644] hover:to-[#D4AF37] text-[#0B1930] font-bold text-sm py-4 rounded-xl shadow-xl hover:shadow-amber-500/20 transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
+                    className="w-full bg-[#D4AF37] hover:bg-[#F3C644] text-[#0B1930] font-bold py-4 px-6 rounded-xl text-base shadow-xl transition-all duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Send Proposal Request Directly</span>
+                    <span>Submit Brief &amp; Connect via WhatsApp</span>
                   </button>
                 </form>
               )}
@@ -308,32 +323,38 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* SECTION: GOOGLE MAPS EMBED */}
-        <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-sm">
-          <div className="max-w-2xl mb-8">
-            <div className="text-xs font-bold tracking-widest uppercase text-[#B89225] mb-2">
-              Physical Location
+        {/* SECTION 3: INTERACTIVE GOOGLE MAPS HQ EMBED */}
+        <div className="bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-10 shadow-lg">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 mb-6 gap-4">
+            <div>
+              <span className="text-xs font-bold tracking-widest uppercase text-[#B89225] block mb-1">
+                Geographic Presence
+              </span>
+              <h3 className="text-2xl font-bold text-[#0B1930]">
+                Varanasi Central Headquarters
+              </h3>
             </div>
-            <h2 className="text-2xl font-bold text-[#0B1930]">
-              Visit Our Corporate Office
-            </h2>
-            <p className="text-xs text-slate-500 mt-1">
-              Located in Varanasi, Uttar Pradesh. Schedule an appointment or visit
-              for campaign creative reviews.
-            </p>
+            <a
+              href="https://maps.google.com/?q=Varanasi,+Uttar+Pradesh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs font-bold text-[#0B1930] hover:text-[#D4AF37] border border-slate-200 px-4 py-2.5 rounded-xl hover:border-[#D4AF37] transition-all"
+            >
+              <MapPin className="w-4 h-4 text-[#D4AF37]" />
+              <span>Open in Google Maps &rarr;</span>
+            </a>
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md h-96 w-full relative">
+          <div className="w-full h-80 sm:h-96 rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
             <iframe
-              src={companyData.contact.mapEmbedUrl}
+              title="Media Maitri Headquarters Varanasi"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115408.08799863484!2d82.9087063!3d25.3176452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2db76febcf4d%3A0x68131710853ff0b5!2sVaranasi%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Media Maitri Office Location - Awaleshpur Varanasi"
-              className="w-full h-full"
             />
           </div>
         </div>
