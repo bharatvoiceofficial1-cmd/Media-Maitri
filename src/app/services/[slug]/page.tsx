@@ -13,10 +13,17 @@ import {
   Users2,
   ShieldCheck,
   CreditCard,
+  Layers,
+  Clock,
+  MapPin,
+  FileCheck,
+  Building,
+  Check,
 } from "lucide-react";
 import Card3D from "@/components/Card3D";
-import { servicesData, ServiceItem } from "@/data/servicesData";
+import { servicesData } from "@/data/servicesData";
 import { companyData } from "@/data/companyData";
+import { serviceMetadataMap } from "@/data/serviceMetadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -36,12 +43,12 @@ export async function generateMetadata({
 
   if (!service) {
     return {
-      title: "Service Not Found",
+      title: "Service Not Found | Media Maitri",
     };
   }
 
   return {
-    title: `${service.title} | Media Maitri Services`,
+    title: `${service.title} | Technical Scope & Specifications | Media Maitri`,
     description: service.introduction.slice(0, 160),
     openGraph: {
       title: `${service.title} | Media Maitri`,
@@ -60,6 +67,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   }
 
   const service = servicesData[serviceIndex];
+  const meta = serviceMetadataMap[service.slug];
   const prevService =
     serviceIndex > 0 ? servicesData[serviceIndex - 1] : null;
   const nextService =
@@ -67,15 +75,23 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? servicesData[serviceIndex + 1]
       : null;
 
-  const whatsappMessage = encodeURIComponent(
-    `Hello Media Maitri, I would like to enquire about your service: ${service.title}.`
+  // Synergistic companion services
+  const companionServices = (meta?.synergies || [])
+    .map((synSlug) => servicesData.find((s) => s.slug === synSlug))
+    .filter(Boolean);
+
+  const defaultWhatsappMessage = encodeURIComponent(
+    `Hello Media Maitri, I would like to request technical specifications and a quote for: ${service.title}.`
   );
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-16">
+    <div className="bg-[#FAF9F6] min-h-screen py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* BREADCRUMB */}
-        <div className="flex items-center gap-2 text-xs text-slate-500 mb-8">
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 text-xs text-slate-500 mb-8 overflow-x-auto whitespace-nowrap"
+        >
           <Link href="/" className="hover:text-[#D4AF37] transition-colors">
             Home
           </Link>
@@ -88,20 +104,20 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </Link>
           <span>/</span>
           <span className="text-[#0B1930] font-semibold">{service.title}</span>
-        </div>
+        </nav>
 
         {/* HERO SECTION */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#D4AF37] bg-amber-50 border border-amber-200 px-3.5 py-1.5 rounded-full">
-              SERVICE {service.id} OF 12 &bull; MEDIA MAITRI
+              SERVICE {service.id} OF 12 &bull; {meta?.category || "MEDIA MAITRI"}
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1930] leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1930] leading-tight tracking-tight">
               {service.title}
             </h1>
 
-            <p className="text-base sm:text-lg font-semibold text-amber-700">
+            <p className="text-base sm:text-lg font-semibold text-amber-800">
               {service.tagline}
             </p>
 
@@ -109,13 +125,27 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               {service.introduction}
             </p>
 
+            {/* QUICK SLA CALLOUT */}
+            {meta?.sla && (
+              <div className="flex flex-wrap items-center gap-4 text-xs pt-2">
+                <div className="flex items-center gap-2 text-slate-700 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-sm">
+                  <Clock className="w-4 h-4 text-[#D4AF37]" />
+                  <span>Turnaround: <strong>{meta.sla}</strong></span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-700 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-sm">
+                  <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
+                  <span>Quality Standard: <strong>100% Authentic Proofing</strong></span>
+                </div>
+              </div>
+            )}
+
             {/* ACTION BUTTONS */}
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <a
-                href={`https://wa.me/${companyData.contact.whatsapp}?text=${whatsappMessage}`}
+                href={`https://wa.me/${companyData.contact.whatsapp}?text=${defaultWhatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg hover:shadow-emerald-500/25 transition-all hover:scale-105"
+                className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg hover:shadow-emerald-500/25 transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 <MessageCircle className="w-5 h-5" />
                 <span>Enquire via WhatsApp</span>
@@ -123,7 +153,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
               <a
                 href={`tel:${companyData.contact.phone1}`}
-                className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all"
+                className="inline-flex items-center gap-2 bg-[#0B1930] hover:bg-slate-800 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 <Phone className="w-4 h-4 text-[#D4AF37]" />
                 <span>Call {companyData.contact.phone1}</span>
@@ -134,7 +164,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           {/* VISUAL SHOWCASE MOCKUP */}
           <div className="lg:col-span-5">
             <Card3D depth={18}>
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-950 border border-amber-500/30">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#0B1930] border border-amber-500/30">
                 <div className="relative h-80 sm:h-96 w-full">
                   <Image
                     src={service.image}
@@ -145,15 +175,69 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     className="object-cover"
                   />
                 </div>
-                <div className="p-4 bg-[#0B1930] text-center border-t border-white/10">
-                  <span className="text-xs font-semibold text-amber-300">
-                    Official Portfolio Mockup &bull; Company Magazine 2027–2028
+                <div className="p-4 bg-[#0B1930] text-center border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
+                  <span className="font-semibold text-amber-300">
+                    Official Production Standard
+                  </span>
+                  <span className="font-mono text-slate-400">
+                    Magazine 2027–2028
                   </span>
                 </div>
               </div>
             </Card3D>
           </div>
         </div>
+
+        {/* SECTION: TECHNICAL SPECIFICATIONS & EXECUTION MATRIX */}
+        {meta?.specs && (
+          <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-sm mb-16">
+            <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#B89225] mb-2">
+              <FileCheck className="w-4 h-4 text-[#D4AF37]" />
+              <span>Production &amp; Engineering Matrix</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B1930] mb-8">
+              Technical Specifications &amp; Quality Protocols
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                  Material &amp; Standard
+                </div>
+                <p className="text-xs text-slate-800 font-medium leading-relaxed">
+                  {meta.specs.material}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                  Turnaround Timeline
+                </div>
+                <p className="text-xs text-slate-800 font-medium leading-relaxed">
+                  {meta.specs.turnaround}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                  Geographic Coverage
+                </div>
+                <p className="text-xs text-slate-800 font-medium leading-relaxed">
+                  {meta.specs.coverage}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                  Verification &amp; Proofing
+                </div>
+                <p className="text-xs text-slate-800 font-medium leading-relaxed">
+                  {meta.specs.verification}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* SECTION: 5 KEY INCLUSIONS */}
         <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-sm mb-16">
@@ -170,7 +254,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {service.inclusions.map((inc, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-[#D4AF37] transition-all flex flex-col justify-between"
+                className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-[#D4AF37] transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
                   <div className="text-xs font-mono font-bold text-[#D4AF37] mb-3">
@@ -186,7 +270,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             ))}
 
-            {/* BONUS CARD (IF PRESENT, e.g. VISITING CARDS) */}
+            {/* BONUS CARD (IF PRESENT) */}
             {service.bonusFeature && (
               <div className="p-6 rounded-2xl bg-amber-50 border border-amber-300 flex flex-col justify-between">
                 <div>
@@ -225,7 +309,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
 
           {/* OUR COMMITMENT */}
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-[#0B1930] to-[#060E1A] text-white border border-amber-500/30 shadow-xl flex flex-col justify-between">
+          <div className="p-8 rounded-3xl bg-[#0B1930] text-white border border-amber-500/30 shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-amber-300 mb-3">
                 <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
@@ -238,11 +322,50 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 {service.ourCommitment}
               </p>
             </div>
-            <div className="pt-6 mt-6 border-t border-white/10 text-xs text-amber-400/90 italic">
+            <div className="pt-6 mt-6 border-t border-white/10 text-xs text-amber-400 italic">
               &ldquo;{companyData.tagline}&rdquo;
             </div>
           </div>
         </div>
+
+        {/* COMPLEMENTARY MULTI-CHANNEL SOLUTIONS */}
+        {companionServices.length > 0 && (
+          <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-sm mb-16">
+            <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#B89225] mb-2">
+              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+              <span>Cross-Channel Campaign Amplification</span>
+            </div>
+            <h2 className="text-2xl font-extrabold text-[#0B1930] mb-6">
+              Frequently Paired with {service.title}
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {companionServices.map((comp) => {
+                if (!comp) return null;
+                return (
+                  <Link
+                    key={comp.id}
+                    href={`/services/${comp.slug}`}
+                    className="p-6 rounded-2xl bg-slate-50 hover:bg-amber-50/50 border border-slate-200 hover:border-[#D4AF37] transition-all duration-200 flex items-center justify-between group"
+                  >
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-[#D4AF37] bg-white px-2 py-0.5 rounded border border-amber-200 mb-2 inline-block">
+                        SERVICE {comp.id}
+                      </span>
+                      <h3 className="text-base font-bold text-[#0B1930] group-hover:text-[#B89225] transition-colors">
+                        {comp.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-1 line-clamp-1">
+                        {comp.tagline}
+                      </p>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-[#D4AF37] group-hover:translate-x-1 transition-all shrink-0 ml-4" />
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* PREV / NEXT SERVICE NAVIGATION */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-slate-200">
@@ -264,7 +387,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             href="/services"
             className="text-xs font-bold text-[#D4AF37] uppercase tracking-wider hover:underline"
           >
-            All 12 Services
+            All 12 Services Directory
           </Link>
 
           {nextService ? (
